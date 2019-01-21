@@ -62,7 +62,7 @@ DB.prototype.find = function (collection_name,conditions,callback){
  * @param {*} conditions 查询条件
  * @param {*} callback 回调函数
  */
-DB.prototype.findone = function (collection_name,conditions,callback){
+DB.prototype.findOne = function (collection_name,conditions,callback){
 
     // 拿到
     this.getConnection(collection_name,(collection,client) => {
