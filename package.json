@@ -1,24 +1,28 @@
 {
-  "name": "nodePoject",
+  "name": "szhmqd27_node",
   "version": "1.0.0",
-  "description": "",
+  "description": "深圳黑马前端27期Node项目",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "nodemon src/app.js"
+    "start": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tangs8dj/nodePoject.git"
+    "url": "git+https://github.com/Duanzihuang/szhmqd27_node.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tangs8dj/nodePoject/issues"
+    "url": "https://github.com/Duanzihuang/szhmqd27_node/issues"
   },
-  "homepage": "https://github.com/tangs8dj/nodePoject#readme",
+  "homepage": "https://github.com/Duanzihuang/szhmqd27_node#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "captchapng": "0.0.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "mongodb": "^3.1.12"
   }
 }
