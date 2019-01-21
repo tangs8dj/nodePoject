@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +46,7 @@
                                 <!-- <button type="submit" onclick="login()"  class="btn btn-default">登录</button> -->
                                 <button onclick="login()"  class="btn btn-default">登录</button>
                                 &nbsp;&nbsp;
-                                <input  onclick="register();" type="button"  value="注册" class="btn btn-danger" autocomplete="off">
+                                <input  onclick="register();" type="button"  value="注册" class="btn btn-danger">
                             </div>
                         </div>
                    </div>
@@ -54,13 +56,15 @@
     </div>
 </body>
 <script>
-    // 登录
+    // 登录请求
     function login(){
-        // 获取info
-        let username = $('#usernameId').val().trim();
-        let password = $.md5($('#passwordId').val());
+        // 获取login info
+        let username = $('#usernameId').val().trim()
+        let password = $.md5($('#passwordId').val())
         let vcode = $('#vcodeId').val()
-        // 发送ajax
+
+        console.log(`${username}--${password}--${vcode}--`);
+
         $.ajax({
             type: "post",
             url: "/account/login",
@@ -72,20 +76,30 @@
             dataType: "json",
             success: function (response) {
                 console.log(response);
+
+                if(response.status != 0){
+                    alert(response.message)
+                    getVcode();
+                }else{
+                    location.href = '/account/register'
+                }
             }
         });
 
     }
-
-    // vcode手动刷新
+    // 刷新验证码请求
     $("#vcodeimgId").click(function(){
         // GET 的缓存问题
         // GET & url不变
-        $("#vcodeimgId").attr('src',`/account/vcode?aaa=${Math.random()}`)
+        getVcode();
     })
+    // 封装验证码刷新功能
+    function getVcode(){
+        $("#vcodeimgId").attr('src',`/account/vcode?aaa=${Math.random()}`)
+    }
     // 跳转注册页面
-    function register(){
-        location.href = '/account/register';
+    function register() {
+        location.href  = '/account/register'
     }
 </script>
 </html>

@@ -1,27 +1,25 @@
-// 导包
-const  express = require('express');
+/**
+ * 注册和登录的处理
+ */
+const express = require('express')
 const path = require('path')
 
 // 创建路由对象
-const accountRouter = express.Router();
+const accountRouter = express.Router()
 
-// 连接路由控制器分发路由rigester页面
-const accountControllers = require(path.join(__dirname,'../controllers','accountControllers.js'))
+// 导入控制器模块
+const accountController = require(path.join(__dirname,"../controllers/accountController.js"))
 
+// 获取注册页面的请求
+accountRouter.get('/register',accountController.getRegisterPage)
+// 注册
+accountRouter.post('/register',accountController.register)
+// 获取登录页面
+accountRouter.get('/login',accountController.getLoginPage)
+// 获取验证码
+accountRouter.get('/vcode',accountController.getVcodeImage)
+// 验证登录页面
+accountRouter.post('/login',accountController.login)
 
-// mvc 处理register页面请求
-accountRouter.get('/register',accountControllers.getRegisterPage)
-
-// 处理注册信息
-accountRouter.post('/register',accountControllers.register)
-
-// 处理login页面请求
-accountRouter.get('/login',accountControllers.getLoginPage)
-
-// 处理login页面刷新验证码的请求
-accountRouter.get('/vcode',accountControllers.getLoginVcode)
-
-// 处理login页面登录验证checkloginInfo
-accountRouter.post('/login',accountControllers.checkloginInfo)
-
+// 导出路由对象
 module.exports = accountRouter
