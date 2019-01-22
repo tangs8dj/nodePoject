@@ -1,5 +1,6 @@
 // 导包
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
 
 // 封装MongoDB
 //     1 初始化数据库信息
@@ -7,7 +8,7 @@ const MongoClient = require('mongodb').MongoClient;
         // 1.2 把初始化信息,当做构造函数的属性
     // 2 把操作数据库的方法,给构造函数的原型添加
         // 2.1 每一个方法要求能够通用
-    // 3 暴露构造函数给调用者
+    // 3 暴露构造函数的实例给调用者
 /**
  * 构造函数
  */
@@ -34,8 +35,8 @@ DB.prototype.getConnection = function (collection_name,callback){
     });
 }
 
-
-
+//MongoDB ID处理函数
+DB.prototype.ObjectID = ObjectID
 
 
 /** 查询全部
@@ -126,7 +127,7 @@ DB.prototype.updateMany = function (collection_name,conditions,update_fields,cal
     // 拿到
     this.getConnection(collection_name,(collection,client) => {
 
-        collection.updateMany(conditions,update_fields,(err, result) => {
+        collection.updateMany(conditions,{$set:update_fields},(err, result) => {
             client.close();//关闭链接
             callback(err,result)//参数1:报错信息   参数2:查询结果
         });
@@ -146,7 +147,7 @@ DB.prototype.updateOne = function (collection_name,conditions,update_fields,call
     // 拿到
     this.getConnection(collection_name,(collection,client) => {
 
-        collection.updateOne(conditions,update_fields,(err, result) => {
+        collection.updateOne(conditions,{$set:update_fields},(err, result) => {
             client.close();//关闭链接
             callback(err,result)//参数1:报错信息   参数2:查询结果
         });
