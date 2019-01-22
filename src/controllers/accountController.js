@@ -104,8 +104,10 @@ exports.login = (req,res) => {
         // 如果result == null 没有查询到，就返回用户名或密码错误，如果查询到了，说明用户名已经存在,就验证成功
         if (doc.length != 0) {
           // 存在
+          req.session.loginedName = username;//写入session
           // 返回
           res.json(result);
+          
         } else {
           //3、如果用户名不存在，插入到数据库中
           // result2 有值，代表成功 result2 为null就是失败
@@ -118,4 +120,10 @@ exports.login = (req,res) => {
     
   
 
+}
+
+// 导出注销登录
+exports.logout = (req,res) => {
+  req.session.loginedName = null;
+  res.send(`<script>location.href = '/account/login'</script>`)
 }

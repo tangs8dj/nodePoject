@@ -13,6 +13,7 @@ exports.getListPage = (req, res) => {
         let html = arttemplate(path.join(__dirname, '../public/views/list.html'), {
             student: docs,
             keyword,
+            loginedName:req.session.loginedName
         })
 
         // 返回list.html
@@ -25,7 +26,7 @@ exports.getListPage = (req, res) => {
 exports.getAddStudentPage = (req,res) => {
 
     // 使用art-template处理模板
-    let html = arttemplate(path.join(__dirname,'../public/views/add.html'),{}) 
+    let html = arttemplate(path.join(__dirname,'../public/views/add.html'),{loginedName:req.session.loginedName}) 
 
     //返回add.html
     res.send(html)
@@ -50,6 +51,8 @@ exports.editStudentPage = (req,res) => {
     let _id = db.ObjectID(req.params.studentId)
 
     db.findOne('studentInfo',{_id},(err,doc) => {
+
+        doc[0].loginedName = req.session.loginedName
 
        // 使用art-template处理模板
         let edit = arttemplate(path.join(__dirname,'../public/views/edit.html'),doc[0]) 

@@ -58,4 +58,16 @@
     </div>
 </body>
 
+<script>
+
+    function logout(){
+        if (confirm(`确认要注销吗?`)){
+
+            location.href = '/account/logout'
+        }else{
+            return false;
+        }
+    }
+</script>
+
 </html>
