@@ -19,6 +19,7 @@ app.use(session({ secret: 'keyboard cat',resave:false,saveUninitialized:false, c
 //设置静态资源根目录
 app.use(express.static(path.join(__dirname,"public")))
 
+//设置登录拦截 拦截全部链接,判断是否登录
 app.all('/*',(req,res,next) => {
     if(req.url.includes('account')){
         next()
@@ -48,3 +49,5 @@ app.listen(9527,'127.0.0.1',err=>{
 
     console.log("start ok")
 })
+
+
