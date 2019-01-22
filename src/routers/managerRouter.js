@@ -1,6 +1,9 @@
 /**
  *  studentManager
  *  学生管理页面 
+ *  二级路径get用req.query.key 取值 /manager/list?key=111
+ *  二级路径post用req.body.key 取值 /manager/list
+ *  三级路径get用req.params.key 取值  /delete/sadasdasd(可变的字段)' 在路由处理中设置 /delete/:studentId'
  *  
  */
 // 导包
@@ -22,6 +25,8 @@ managerRouter.post('/add',managerController.postAddStudent);//处理post提交st
 managerRouter.get('/edit/:studentId',managerController.editStudentPage);//处理get携带动态id请求edit页面
 
 managerRouter.post('/edit/:studentId',managerController.postEditStudent);//处理post携带动态id请求修改
+
+managerRouter.get('/delete/:studentId',managerController.deleteStudentInfo)//处理get携带id请求delete过来student info
 
 
 

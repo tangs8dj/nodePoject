@@ -66,7 +66,7 @@ exports.postEditStudent = (req,res) =>{
     // 拿到传递的id,包装成MongoDB ObjectID
     let _id = db.ObjectID(req.params.studentId)
 
-    //把拿到的id当做条件
+    //把拿到的id当做条件,更新数据库
     db.updateOne('studentInfo',{_id},req.body,(err,result) => {
 
         if (!result) {
@@ -77,4 +77,21 @@ exports.postEditStudent = (req,res) =>{
         }
     })
 
+}
+
+//导出删除的请求操作
+exports.deleteStudentInfo = (req,res) => {
+    // 拿到传递的id,包装成MongoDB ObjectID
+    let _id = db.ObjectID(req.params.studentId)
+
+    //把拿到的id当做条件,删除数据库中的studentInfo
+    db.deleteOne('studentInfo',{_id},(err,result) => {
+
+        if (!result) {
+            //失败
+            res.send(`<script>alert("删除失败")</script>`);
+        } else {
+            res.send(`<script>location.href='/manager/list'</script>`);
+        }
+    })
 }
